@@ -9,11 +9,13 @@ The options menu has also quite some functionality in store therefore a seperate
 handles it. "importHelper.js", not even 100 lines of code, should be quite self-explanatory. "tiles.js" is
 similar - it is a JSON-file. Finally, "storage.js" is a wrapper for HTML Web Storage aka "localStorage".
 
+```
                    tiles.js
                       |
 storage.js --- editor.js --- importHelper.js
       |               |
       ---------- options.js
+```
 
 Unfortunately, it is absolutely not equally easy to generate UML or something similar as it is with C#.
 I searched a bit for a tool but did not find a convincing solution.
