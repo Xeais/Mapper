@@ -4,7 +4,7 @@ Just open "index.html".
 
 This works smoothly, because this app only uses **HTML, CSS and JavaScript**, hence no web server is needed. Furthermore, there are no dependencies (**not even jQuery!**).
 ## Code Relations
-The main handler is "editor.js". It initializes and manages the whole user interaction in the editor area. The options menu has also quite some functionality in store, therefore a seperate file called "options.js" handles it. "importHelper.js", not even 100 lines of code, should be quite self-explanatory. "tiles.js" is similar - it is a [JSON](https://www.w3schools.com/js/js_json_intro.asp)-file. Finally, "storage.js" is a wrapper for [**HTML Web Storage**](https://www.w3schools.com/html/html5_webstorage.asp) aka "localStorage".
+The main handler is "editor.js". It initializes and manages the whole user interaction in the editor area. The *options menu* has also quite some functionality in store, therefore a seperate file called "options.js" handles it. "importHelper.js", not even 100 lines of code, should be quite self-explanatory. "tiles.js" is similar - it is a [JSON](https://www.w3schools.com/js/js_json_intro.asp)-file. Finally, "storage.js" is a wrapper for [**HTML Web Storage**](https://www.w3schools.com/html/html5_webstorage.asp) aka "localStorage".
 
 ```
                    tiles.js
