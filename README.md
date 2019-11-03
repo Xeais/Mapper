@@ -2,9 +2,9 @@
 ## Usage
 Just open "index.html". 
 
-This works smoothly, because this app only uses HTML, CSS and JavaScript, hence no web server is needed. Furthermore, there are no dependencies (not even jQuery!).
+This works smoothly, because this app only uses **HTML, CSS and JavaScript**, hence no web server is needed. Furthermore, there are no dependencies (**not even jQuery!**).
 ## Code Relations
-The main handler is "editor.js". It initializes and manages the whole user interaction in the editor area. The options menu has also quite some functionality in store, therefore a seperate file called "options.js" handles it. "importHelper.js", not even 100 lines of code, should be quite self-explanatory. "tiles.js" is similar - it is a [JSON](https://www.w3schools.com/js/js_json_intro.asp)-file. Finally, "storage.js" is a wrapper for [HTML Web Storage](https://www.w3schools.com/html/html5_webstorage.asp) aka "localStorage".
+The main handler is "editor.js". It initializes and manages the whole user interaction in the editor area. The options menu has also quite some functionality in store, therefore a seperate file called "options.js" handles it. "importHelper.js", not even 100 lines of code, should be quite self-explanatory. "tiles.js" is similar - it is a [JSON](https://www.w3schools.com/js/js_json_intro.asp)-file. Finally, "storage.js" is a wrapper for [**HTML Web Storage**](https://www.w3schools.com/html/html5_webstorage.asp) aka "localStorage".
 
 ```
                    tiles.js
@@ -22,7 +22,7 @@ Don't get me wrong: Electron is a [great open-source framework](https://github.c
 ## Grunt and JSHint
 Both were just short, albeit nice, digressions out of curiosity.
 ## DalekJS
-I was testing this also out of curiosity (I heard almost only positive things about it) but with [DalekJS](http://dalekjs.com) I spent quite some time.
+I was testing this also out of inquisitiveness (I heard almost only positive things about it) but with [DalekJS](http://dalekjs.com) I spent quite some time.
 
 The experience was all right, however, it was not able to transform me in an avid supporter of automated testing. The cross browser aspect is unquestionably really helpful, though.
 
