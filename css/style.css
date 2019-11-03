@@ -1,0 +1,406 @@
+/* --------------- *
+ * --- General --- *
+ * --------------- */
+
+* {font-family: Verdana, Tahoma, "San Serif";}
+
+html, body
+{
+  margin: 0;
+  background-color: #111;
+  padding: 0;
+  font-size: 12px;
+  line-height: 25px;
+}
+
+body 
+{
+	padding-top: 2%;
+	padding-left: 180px;
+}
+
+p, ol {margin: 0;}
+
+a {text-decoration: none;}
+
+a:link, a:visited
+{
+  color: #004C4C;
+  text-decoration: none;
+}
+
+a:hover, a:focus, a:active {color: #00B2B2;}
+
+h1 {color: chartreuse}
+
+hr
+{
+  margin-top: 15px;
+  border-top: 1px dashed #161616;
+}
+
+hr.help
+{
+  margin-top: 20px;
+  height: 5px;
+  border: 1px;
+  box-shadow: 0 4px 2px -2px rgba(255, 255, 255, 0.8) inset; /* box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit; */
+  border-radius: 2px;
+}
+
+kbd
+{
+  border-width: 1px 3px 3px 1px;
+  border-style: solid;
+  border-color: #ccc #aaa #888 #bbb;
+  border-radius: 5px;
+  padding: 2px 4px;
+  white-space: nowrap;
+  color: #000;
+  background: #eee;
+}
+
+.dispNone {display: none;}
+
+.dispInBlock {display: inline-block;}
+
+.mandatory {color: red;}
+
+::-webkit-scrollbar {width: 10px;}
+
+::-webkit-scrollbar-track {border-radius: 8px;}
+
+::-webkit-scrollbar-thumb
+{
+  background-color: #9f9f9f;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {background-color: #8c8c8c;}
+
+/* ----------------------------- *
+ * --- Toolbox (left column) --- *
+ * ----------------------------- */
+
+#preload, #options
+{
+  position: fixed;
+  top: 5%;
+  left: calc(50% - 250px);
+  max-height: 100%;
+  overflow-y: scroll; /* Enable scrolling if the browser window is not tall enough for the options menu to fit in! */
+  background-color: #efefef;
+  width: 500px;
+  z-index: 20;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#options
+{
+  top: 0;
+  z-index: 30;
+}
+
+#toolBox
+{
+  display: none;
+  position: fixed;
+  top: 0%;
+  left: 0.1%;
+  bottom: 2%;
+  float: left;
+  z-index: 35; /* Greater than "#options"' one so that "#overlay" which is integrated in "#toolbox" can be in front of "#options". */
+  overflow-x: hidden;
+}
+
+input[type=button]:enabled, button:enabled {cursor: pointer;}
+
+button:disabled img {opacity: 0.4;}
+
+#undo, #redo, .menuButtons
+{
+  margin-bottom: 10px;
+  background-color: #9f9f9f;
+  border: 1px outset #e6e6e6;
+  outline: none;
+  border-radius: 8px;
+}
+
+.menuButtons
+{
+  display: inline-block;
+  padding: 2px 8px;
+  text-decoration: none;
+  text-align: center;
+  color: #fff;
+}
+
+.menuButtons:hover {background-color: #8c8c8c}
+
+.menuButtons:active
+{
+  background-color: #737373;
+  transform: translateY(4px);
+}
+
+#options fieldset
+{
+  margin: 10px;
+  border: 2px inset #9f9f9f;
+  border-radius: 8px;
+}
+
+#options legend, #options input[type=submit], #options input[type=button]
+{
+  background-color: #161616;
+  border: 1px solid #9f9f9f;
+  border-radius: 8px;
+  padding: 0 5px;
+  color: white;
+}
+
+#options label
+{
+  display: inline-block;
+  width: 120px;
+  text-align: left;
+}
+
+#options input[type=text], #options select
+{
+  display: inline-block;
+  margin: 2px;
+  border: 1px solid #9f9f9f;
+  padding: 0 5px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+#options input[type=text]:required + .mandatory::before {content: " (required)";}
+
+#options input[type=checkbox]
+{
+  margin: 2px;
+  border: 1px solid #9f9f9f;
+}
+
+#options input[type=text]:hover, #options input[type=checkbox]:hover, #options select:hover
+{
+  background-color: #c6c6c6;
+  border: 1px solid #8c8c8c;
+}
+
+#options input[type=text]:focus, #options input[type=checkbox]:focus, #options select:focus
+{
+  background-color: #9f9f9f;
+  border: 1px solid #8c8c8c;
+}
+
+#options input[type=submit], #options input[type=button]
+{
+  margin: 8px 0 0;
+  border: 1px outset #9f9f9f;
+  border-radius: 4px;
+  outline: none;
+  padding: 2px 5px;
+}
+
+#options input[type=button]#closeOptions 
+{
+  float: right;
+  margin: 0 10px;
+}
+
+#options input[type=submit]:focus, #options input[type=submit]:hover, 
+#options input[type=button]:focus, #options input[type=button]:hover 
+{
+  color: #ccc;
+  background-color: #404040;
+}
+
+#mapVersionInfo
+{
+  display: none;
+  margin-top: 3px;
+}
+
+#mirrorMap
+{
+  display: inline-block;
+  border-spacing: 1px;
+  border-collapse: separate;
+  text-align: center;
+}
+
+#mirrorMap td 
+{
+	width: 15px;
+	transition: transform 0.3s;
+	border: 1px solid black;
+  padding: 5px;
+}
+
+#mirrorMap tr {transition: transform 0.3s;}
+
+#mirrorMap td.active 
+{
+	background-color: #ccc;
+	cursor: pointer;
+}
+
+.rotate90 {transform: rotate(90deg);}
+
+.rotate180 {transform: rotate(180deg);}
+
+.rotate270 {transform: rotate(270deg);}
+
+.mirrorVertical {transform: scale(1, -1);}
+
+.mirrorHorizontal {transform: scale(-1, 1);}
+
+.mirrorBoth {transform: scale(-1, -1);}
+
+#general * {margin: 2px;}
+
+#overlay
+{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 40; 
+  cursor: pointer; 
+}
+
+#overlay .textAbsolute
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: white;
+  transform: translate(-50%,-50%);
+}
+
+table.text
+{
+  background-color: #c6c6c6;
+  border-collapse: collapse;
+  vertical-align: middle;
+}
+
+table.text td, table.text th
+{
+  border: 1px inset #fff;
+  padding: 0 5px;
+}
+
+table.text th
+{
+  background-color: #161616;
+  padding: 10px 5px;
+  text-align: left;
+  color: white;
+}
+
+table.text tr:nth-child(even) {background-color: #9f9f9f;}
+
+table.text tr:hover {background-color: #8c8c8c;}
+
+#toolBox p 
+{
+	color: #ccc;
+	text-shadow: 0px 0px 2px black;
+}
+
+.tileButton:hover
+{
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+#mapInfo {margin: 5px;}
+
+#resizeTable td:not(:empty)
+{
+  border: 1px outset #9f9f9f;
+  font-size: 21px;
+}
+
+#resizeTable td:empty {cursor: default;}
+
+a.plus
+{
+  color: green;
+  font-weight: bold;
+}
+
+a.minus
+{
+  color: red;
+  font-weight: bold;
+}
+
+/* -------------------- *
+ * --- Drop Message --- *
+ * -------------------- */
+
+#dropMessage
+{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(239, 239, 239, 0.7);
+  z-index: 20;
+}
+
+#dropMessage p
+{
+  margin: 20% auto 0;
+  width: 400px;
+  border: 3px dashed #333;
+  padding: 10px;
+  font-size: 45px;
+  text-align: center;
+}
+
+/* ---------------- *
+ * --- Map Area --- *
+ * ---------------- */
+
+td:hover {cursor: pointer;}
+
+#infoBox
+{
+  display: none;
+  position: absolute;
+  margin-bottom: 10px;
+  background-color: rgba(204, 204, 204, 0.2);
+  z-index: 10;
+  border-radius: 4px;
+  padding: 0 5px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+#map {transform-origin: top left;}
+
+#preview, previewCanvas
+{
+  position: fixed;
+  top: 1%;
+  right: 1%;
+  box-shadow: 0px 0px 5px white;
+}
+
+#previewCanvas
+{
+  width: 250px;
+  height: 250px;
+}

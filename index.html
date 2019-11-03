@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Mapper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Mapper - a nice, small 2D Map Editor" />
+  <meta name="author" content="D. Dubs" />
+  <link rel="stylesheet" href="css/style.css?v=1.3" />
+  <script src="js/editor.js?v=1.3"></script>
+  <script src="js/importHelper.js?v=1.3"></script>
+  <script src="js/storage.js?v=1.3"></script>
+  <script src="js/tiles.js?v=1.3"></script>
+  <script src="js/options.js?v=1.3"></script>
+  <link rel="icon" href="img/gui/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <div id="dropMessage"><p>Drop your map file here!</p></div>
+  <div id="preload" class="dispNone" data-message="Preloading image $1 of $2 ..."><p></p></div>
+  <div id="infoBox">
+    <p>X: <span id="posX"></span></p>
+    <p>Y: <span id="posY"></span></p>
+    <p>Tile: <span id="tile"></span></p>
+  </div>
+  <div id="toolBox">
+    <input type="button" id="optionButton" class="menuButtons" onclick="toggleOptions(true)" value="Options" title="Options (o)" accesskey="o" />
+    <input type="button" class="menuButtons" onclick="overlayOn()" value="?" title="Help (h)" accesskey="h" />
+    <div id="overlay" onclick="overlayOff()">
+      <div class="textAbsolute">
+        <h1>Help</h1>
+        <p>Mapper is really easy to use, so I cannot think of many hints for users:</p>
+        <ol>
+          <li>Mapper saves automatically to "localStorage". Use export if you would like to save your creation to a file of your choosing.</li>
+          <li><kbd>CTRL</kbd> + mouse wheel or <kbd>CTRL</kbd> + <kbd>+</kbd> / <kbd>-</kbd> lets you zoom the map (<kbd>SHIFT</kbd> added doubles the zoom-speed).</li>
+          <li>If you select a tile from the list on the left, wait shortly - a tooltip with its name and dimensions appears.</li>
+        </ol>
+        <hr class="help" />
+        <p>Important interaction-elements (each one has a tooltip to name the key) possess HTML-accesskeys. The following table shows how to access shortcut keys in different browsers:</p>
+        <table class="text">
+          <tr>
+            <th>Browser</th>
+            <th>Windows</th>
+            <th>Linux</th>
+            <th>Mac</th>
+          </tr>
+          <tr>
+            <td>Internet Explorer</td>
+            <td><kbd>Alt</kbd> + <kbd>accesskey</kbd></td>
+            <td>N/A</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Chrome</td>
+            <td><kbd>Alt</kbd> + <kbd>accesskey</kbd></td>
+            <td><kbd>Alt</kbd> + <kbd>accesskey</kbd></td>
+            <td><kbd>Control</kbd> <kbd>Alt</kbd> + <kbd>accesskey</kbd></td>
+          </tr>
+          <tr>
+            <td>Firefox</td>
+            <td><kbd>Alt</kbd> <kbd>Shift</kbd> + <kbd>accesskey</kbd></td>
+            <td><kbd>Alt</kbd> <kbd>Shift</kbd> + <kbd>accesskey</kbd></td>
+            <td><kbd>Control</kbd> <kbd>Alt</kbd> + <kbd>accesskey</kbd></td>
+          </tr>
+          <tr>
+            <td>Safari</td>
+            <td><kbd>Alt</kbd> + <kbd>accesskey</kbd></td>
+            <td>N/A</td>
+            <td><kbd>Control</kbd> <kbd>Alt</kbd> + <kbd>accesskey</kbd></td>
+          </tr>
+          <tr>
+            <td>Opera</td>
+            <td colspan="3">Opera 15 or newer: <kbd>Alt</kbd> + <kbd>accesskey</kbd><br />Opera 12.1 or older: <kbd>Shift</kbd> <kbd>Esc</kbd> + <kbd>accesskey</kbd></td>
+          </tr>
+        </table>
+        <hr class="help" />
+        <p>
+          If you want to use your own tiles (relative path: "img/tiles/"), remember they have to be PNGs!<br />
+          Side note: HTML and CSS are W3C-valid!
+        </p>
+      </div>
+    </div><br />
+    <input type="button" class="menuButtons" onclick="terrain.zoomMap(1.0)" value="100 %" title="Reset Zoom (r)." accesskey="r" /><br />
+    <button id="undo" onclick="terrain.undo()" title="Undo (z)" accesskey="z"><img src="img/gui/undo.png" alt="Undo" width="16" height="17" /></button> <button id="redo" onclick="terrain.redo()" title="Redo (y)" accesskey="y"><img src="./img/gui/redo.png" alt="Redo" width="16" height="17" /></button>
+    <!-- Here are the tile-buttons. -->
+    <div id="mapInfo">
+      <p><strong>Size:</strong> <span id="mapSize"></span></p>
+    </div>
+    <table id="resizeTable" title="Resize map.">
+      <tr>
+        <td></td>
+        <td><a href="#" id="topPlus" class="plus" onclick="return terrain.changeMap('top', true);">+</a> <a href="#" id="topMinus" class="minus" onclick="return terrain.changeMap('top', false);">-</a></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a href="#" id="leftPlus" class="plus" onclick="return terrain.changeMap('left', true);">+</a> <a href="#" id="leftMinus" class="minus" onclick="return terrain.changeMap('left', false);">-</a></td>
+        <td></td>
+        <td><a href="#" id="rightPlus" class="plus" onclick="return terrain.changeMap('right', true);">+</a> <a href="#" id="rightMinus" class="minus" onclick="return terrain.changeMap('right', false);">-</a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="#" id="bottomPlus" class="plus" onclick="return terrain.changeMap('bottom', true);">+</a> <a href="#" id="bottomMinus" class="minus" onclick="return terrain.changeMap('bottom', false);">-</a></td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <div id="options" class="dispNone" onmouseover="infoBoxOff()">
+    <fieldset>
+      <legend>New Map</legend>
+      <form onsubmit="newMap(); return false;">
+        <label for="width">Width:</label><input type="text" id="width" required="required" /><span class="mandatory"></span> <br />
+        <label for="height">Height:</label><input type="text" id="height" required="required" /><span class="mandatory"></span> <br />
+        <input type="submit" title="Generate new map (n)." accesskey="n" value="Generate" />
+      </form>
+    </fieldset>
+    <fieldset>
+      <legend>Import Map</legend>
+      <input type="file" id="mapFile" accept=".mpr" />
+      <input type="button" id="import" onclick="importMap()" value="Import" title="Open a map (o)." accesskey="o" />
+    </fieldset>
+    <fieldset>
+      <legend>Import Google-CSV</legend>
+      <input type="file" id="csv" accept=".csv" /><br />
+      <label for="csvBorder">Border:</label><input type="text" id="csvBorder" placeholder="border" value="3" size="3" /><br />
+      <input type="button" id="importCsv" onclick="importCsv()" value="Import CSV" title="Import a Google-CSV-map (i)." accesskey="i" />
+    </fieldset>
+    <fieldset>
+      <legend>Export Map</legend>
+      <!-- For now, keep it short and simple. -->
+      <!-- <input type="text" id="author" placeholder="Name goes here." /> -->
+      <label for="versioning">Versioning: </label><input type="checkbox" id="versioning" onchange="setVersioning(this)" title="Adds a version number to the name, starting with 001." /><br />
+      <p id="mapVersionInfo">Current version: <span id="mapVersion"></span></p>
+      <label for="mapName">Mapname:</label><input type="text" id="mapName" value="Map" required="required" /><span class="mandatory"></span> <br />
+      <input type="button" id="export" onclick="exportMap('file')" value="Export as binary file" />
+      <input type="button" id="exportGCsv" onclick="exportMap('gcsv')" value="Export as Google-CSV" />
+      <input type="button" id="exportMCsv" onclick="exportMap('mcsv')" value="Export as Mapper-CSV (for importing into Mapper)" /><br />
+      <label for="imageFormat">Image-type:</label>
+      <select id="imageFormat" style="margin-top: 10px;">
+        <option value="jpeg">JPEG</option>
+        <option value="png" selected="selected">PNG</option>
+      </select><br />
+      <input type="button" id="exportImage" onclick="exportImage()" value="Export as image" />
+      <a href="" id="exportLink" class="dispNone"></a>
+    </fieldset>
+    <fieldset id="general">
+      <legend>General Options</legend>
+      <input type="button" id="saveOptions" onclick="saveOptions()" value="Save options" />
+      <input type="button" id="resetOptions" onclick="resetOptions()" value="Reset options" />
+    </fieldset>
+    <fieldset id="recFiles">
+      <legend>Recent Files</legend>
+      <div id="recFileLinks"><!-- This part will be filled by code. --></div>
+    </fieldset>
+    <fieldset>
+      <legend>Mirror Map</legend>
+      <table id="mirrorMap">
+        <tr>
+          <td id="first">1</td>
+          <td id="second">2</td>
+        </tr>
+        <tr>
+          <td id="third">3</td>
+          <td id="fourth">4</td>
+        </tr>
+      </table>
+      <div class="dispInBlock">
+        <input type="checkbox" id="rotate" value="rotate" />
+        <label for="rotate">Rotate</label><br />
+        <input type="checkbox" id="reverse" value="reverse" />
+        <label for="reverse">Reverse</label><br />
+        <input type="checkbox" id="extend" value="extend" />
+        <label for="extend">Extend Map</label>
+      </div><br />
+      <div class="dispInBlock">
+        <input type="button" id="mirrorButton" onclick="mirrorMap()" value="Mirror map" />
+      </div>
+    </fieldset>
+    <input type="button" id="closeOptions" onclick="toggleOptions(false)" value="Close" />
+  </div>
+  <!-- <canvas id="previewCanvas"></canvas>
+  <div id="preview"></div> -->
+</body>
+</html>
