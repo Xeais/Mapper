@@ -30,5 +30,6 @@ The experience was all right, however, it was not able to transform me in an avi
 ---
 
 DalekJS is regrettably not maintained any longer. 
+
 - [TestCafé](https://devexpress.github.io/testcafe) is recommended as an alternative. 
 - [Selenium](https://www.seleniumhq.org) could be named here as well.
