@@ -27,4 +27,8 @@ I was testing this also out of inquisitiveness (I heard almost only positive thi
 
 The experience was all right, however, it was not able to transform me in an avid supporter of automated testing. The cross browser aspect is unquestionably really helpful, though.
 
-DalekJS is regrettably not maintained any longer. [TestCafé](https://devexpress.github.io/testcafe) is recommended as an alternative. [Selenium](https://www.seleniumhq.org) could be named here as well.
+---
+
+DalekJS is regrettably not maintained any longer. 
+- [TestCafé](https://devexpress.github.io/testcafe) is recommended as an alternative. 
+- [Selenium](https://www.seleniumhq.org) could be named here as well.
