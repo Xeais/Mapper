@@ -7,20 +7,20 @@ module.exports =
       test.open("index.html");
 
     test.click("#optionButton")
-      .click("#first")
-      .click("#mirrorButton")
-      .assert.enabled("#rotate", "Rotate enabled")
-      .assert.notSelected("#rotate", "Rotate unchecked")
-      .assert.disabled("#reverse", "Reverse disabled")
-      .assert.enabled("#extend", "Extend enabled")
-      .assert.notSelected("#extend", "Extend unchecked")
+        .click("#first")
+        .click("#mirrorButton")
+        .assert.enabled("#rotate", "Rotate enabled")
+        .assert.notSelected("#rotate", "Rotate unchecked")
+        .assert.disabled("#reverse", "Reverse disabled")
+        .assert.enabled("#extend", "Extend enabled")
+        .assert.notSelected("#extend", "Extend unchecked")
 
-      .execute(function()
-      {
-        this.assert.ok(window.active === "first", "\"window.active\" should be 'first', was " + window.active + ".");
-        this.assert.ok(window.terrain.mapSizeX === this.data("mapSizeX"), "mapSizeX === " + this.data("mapSizeX"));
-        this.assert.ok(window.terrain.mapSizeY === this.data("mapSizeY"), "mapSizeY === " + this.data("mapSizeY"));
-      });
+        .execute(function()
+        {
+          this.assert.ok(window.active === "first", "\"window.active\" should be 'first', was " + window.active + ".");
+          this.assert.ok(window.terrain.mapSizeX === this.data("mapSizeX"), "mapSizeX === " + this.data("mapSizeX"));
+          this.assert.ok(window.terrain.mapSizeY === this.data("mapSizeY"), "mapSizeY === " + this.data("mapSizeY"));
+        });
 
     makeShot && test.screenshot("./tests/images/:browser/mirror1.png");
 
@@ -36,22 +36,22 @@ module.exports =
       test.open("index.html");
 
     test.click("#optionButton")
-      .click("#first")
-      .click("#extend")
-      .click("#mirrorButton")
+        .click("#first")
+        .click("#extend")
+        .click("#mirrorButton")
 
-      .assert.enabled("#rotate", "Rotate enabled")
-      .assert.notSelected("#rotate", "Rotate unchecked")
-      .assert.disabled("#reverse", "Reverse disabled")
-      .assert.enabled("#extend", "Extend enabled")
-      .assert.selected("#extend", "Extend checked")
+        .assert.enabled("#rotate", "Rotate enabled")
+        .assert.notSelected("#rotate", "Rotate unchecked")
+        .assert.disabled("#reverse", "Reverse disabled")
+        .assert.enabled("#extend", "Extend enabled")
+        .assert.selected("#extend", "Extend checked")
 
-      .execute(function()
-      {
-        this.assert.ok(window.active === "first", "\"window.active\" should be 'first', was " + window.active + ".");
-        this.assert.ok(window.terrain.mapSizeX === this.data("mapSizeX") * 2, "mapSizeX === " + this.data("mapSizeX") * 2);
-        this.assert.ok(window.terrain.mapSizeY === this.data("mapSizeY") * 2, "mapSizeY === " + this.data("mapSizeY") * 2);
-      });
+        .execute(function()
+        {
+          this.assert.ok(window.active === "first", "\"window.active\" should be 'first', was " + window.active + ".");
+          this.assert.ok(window.terrain.mapSizeX === this.data("mapSizeX") * 2, "mapSizeX === " + this.data("mapSizeX") * 2);
+          this.assert.ok(window.terrain.mapSizeY === this.data("mapSizeY") * 2, "mapSizeY === " + this.data("mapSizeY") * 2);
+        });
 
     makeShot && test.screenshot("./tests/images/:browser/mirror1Extend.png");
 
@@ -67,22 +67,22 @@ module.exports =
       test.open("index.html");
 
     test.click("#optionButton")
-      .click("#first")
-      .click("#rotate")
-      .click("#mirrorButton")
+        .click("#first")
+        .click("#rotate")
+        .click("#mirrorButton")
 
-      .assert.enabled("#rotate", "Rotate enabled")
-      .assert.selected("#rotate", "Rotate checked")
-      .assert.disabled("#reverse", "Reverse disabled")
-      .assert.enabled("#extend", "Extend enabled")
-      .assert.notSelected("#extend", "Extend unchecked")
+        .assert.enabled("#rotate", "Rotate enabled")
+        .assert.selected("#rotate", "Rotate checked")
+        .assert.disabled("#reverse", "Reverse disabled")
+        .assert.enabled("#extend", "Extend enabled")
+        .assert.notSelected("#extend", "Extend unchecked")
 
-      .execute(function()
-      {
-        this.assert.ok(window.active === "first", "\"window.active\" should be 'first', was " + window.active + ".");
-        this.assert.ok(window.terrain.mapSizeX === this.data("mapSizeX"), "mapSizeX === " + this.data("mapSizeX"));
-        this.assert.ok(window.terrain.mapSizeY === this.data("mapSizeY"), "mapSizeY === " + this.data("mapSizeY"));
-      });
+        .execute(function()
+        {
+          this.assert.ok(window.active === "first", "\"window.active\" should be 'first', was " + window.active + ".");
+          this.assert.ok(window.terrain.mapSizeX === this.data("mapSizeX"), "mapSizeX === " + this.data("mapSizeX"));
+          this.assert.ok(window.terrain.mapSizeY === this.data("mapSizeY"), "mapSizeY === " + this.data("mapSizeY"));
+        });
 
     makeShot && test.screenshot("./tests/images/:browser/mirror1Rotate.png");
 
@@ -98,24 +98,24 @@ module.exports =
       test.open("index.html");
 
     test.click("#optionButton")
-      .click("#first")
-      .click("#rotate")
-      .click("#extend")
+        .click("#first")
+        .click("#rotate")
+        .click("#extend")
 
-      .click("#mirrorButton")
+        .click("#mirrorButton")
 
-      .assert.enabled("#rotate", "Rotate enabled")
-      .assert.selected("#rotate", "Rotate checked")
-      .assert.disabled("#reverse", "Reverse disabled")
-      .assert.enabled("#extend", "Extend enabled")
-      .assert.selected("#extend", "Extend checked")
+        .assert.enabled("#rotate", "Rotate enabled")
+        .assert.selected("#rotate", "Rotate checked")
+        .assert.disabled("#reverse", "Reverse disabled")
+        .assert.enabled("#extend", "Extend enabled")
+        .assert.selected("#extend", "Extend checked")
 
-      .execute(function()
-      {
-        this.assert.ok(window.active === "first", "\"window.active\" should be 'first', was " + window.active + ".");
-        this.assert.ok(window.terrain.mapSizeX === this.data("mapSizeX") * 2, "mapSizeX === " + this.data("mapSizeX") * 2);
-        _this.assert.ok(window.terrain.mapSizeY === this.data("mapSizeY") * 2, "mapSizeY === " + this.data("mapSizeY") * 2);
-      });
+        .execute(function()
+        {
+          this.assert.ok(window.active === "first", "\"window.active\" should be 'first', was " + window.active + ".");
+          this.assert.ok(window.terrain.mapSizeX === this.data("mapSizeX") * 2, "mapSizeX === " + this.data("mapSizeX") * 2);
+          _this.assert.ok(window.terrain.mapSizeY === this.data("mapSizeY") * 2, "mapSizeY === " + this.data("mapSizeY") * 2);
+        });
 
     makeShot && test.screenshot("./tests/images/:browser/mirror1ExtendRotate.png");
 
