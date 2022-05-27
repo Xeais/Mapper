@@ -4,29 +4,29 @@ module.exports =
 {
   "save": function(test, external) 
   {
-		console.log(">> Save map data".purple());
+      console.log(">> Save map data".purple());
     test.execute(function() 
     {
-			this.data("mapData", window.terrain.exportData());
+      this.data("mapData", window.terrain.exportData());
     });
 
-		return test;
-	},
+    return test;
+  },
   "load": function(test, external) 
   {
-		console.log(">> Load map data".purple());
+    console.log(">> Load map data".purple());
     test.execute(function() 
     {
-			//Reset these checkoxes, since dalek doesn't do that (wether with a second click nor through a reload)!
-			window.extend.checked = "";
-			window.reverse.checked = "";
-			window.rotate.checked = "";
-			//Reimport map:
-			window.terrain.importData(this.data("mapData"));
-			this.data("mapSizeX", window.terrain.mapSizeX);
-			this.data("mapSizeY", window.terrain.mapSizeY);
+      //Reset these checkoxes, since DalekJS doesn't do that (wether with a second click nor through a reload)!
+      window.extend.checked = "";
+      window.reverse.checked = "";
+      window.rotate.checked = "";
+      //Reimport map:
+      window.terrain.importData(this.data("mapData"));
+      this.data("mapSizeX", window.terrain.mapSizeX);
+      this.data("mapSizeY", window.terrain.mapSizeY);
     });
 
-		return test;
-	}
+    return test;
+  }
 };
