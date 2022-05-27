@@ -460,7 +460,7 @@ function resetOptions()
 {
   store.clear();
 	/* for(var item in terrain.options) 
-   * {
+         * {
 	 *   var option = terrain[terrain.options[item].option + "Default"];
 	 *   //Execute post action:
 	 *   terrain[terrain.options[item].postSave](option);
