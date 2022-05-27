@@ -21,7 +21,7 @@
   "devDependencies": 
   {
     "dalekjs": "0.0.9",
-    "grunt": "1.4.0",
+    "grunt": "1.5.3",
     "grunt-contrib-jshint": "3.0.0",
     "grunt-dalek": "0.2.0",
     "grunt-lint5": "0.3.2"
